@@ -1,0 +1,160 @@
+Katherine Sheu
+HW1 Report
+
+a. Description of obstacles overcome
+
+1. Dealing with a space when the user inputs first and last name.
+I solved this problem by using getline() instead of cin. cin will use the space as a buffer in the stream and only the word appearing before the space will be stored in the specified variable. However, getline() demarcates input ending when there is a new line, so getline() will capture the full name in the specified variable.
+
+2. Checking to see if an empty name or ID number, or correct length ID, was entered.
+Using the length() function, included in the string library, I was able to check whether an empty line was inputed. The length() function was also used to check the length of the ID number.
+
+3. Making sure only "Y" or "N" are accepted as valid inputs.
+Use a boolean statement to see if inputs are one of the two acceptable inputs. Using the "or" operator, if either statement evaluates to true, the entire boolean expression will be true. By added a "not" in front of the entire expression, I can display the error message when the input evaluates neither of the two statements to true.
+
+4. Rounding hours down to the nearest 0.5.
+I checked if the hours was greater than the integer part of the hours + 0.5. If the fractional component was greater than 0.5, an extra 0.5 hour was added to the integer portion of the inputed hours to get the rounded hours. Else, only the integer portion was used for the rounded hours. My original code in which I used fmod(hours, floor(hours)) to obtain the fractional part had an divide by zero error only if the input was less than 1, and solved I this by using subtraction instead to get the fractional part of the input. 
+
+5. Adding on time and a half for hours over 40.
+I solved this by adding up the total pay, using the regular rate for the first 40 hours and 1.5 the rate for hours over 40. Taking this total pay, I divided by the total hours to get a new per hour pay rate. If the hours were not over 40, the new per hour pay rate was the same as the inputed rate.
+
+6. Subtracting the right amounts for the corresponding circumstances.
+My code operates under the assumption that the federal tax threshold is always higher than the union tax threshold, which I documented within the code. If the federal tax threshold is met and the user inputed "Y" to the question, both the tax and the union fee are subtracted. If the user inputed "N", the only check is for whether the union fee threshold is met, and if it is the union fee will be deducted. 
+
+7. Rounding to two decimal places. 
+I used a version of the code shown in the textbook, which was described as a "magic formula." 
+
+
+
+b. Test Cases (all work correctly)(showing the inputs only)
+
+0. Testing that full correct program gives the appropriate output.
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: .01
+Pay Rate: $9.00
+Federal Income Tax Withheld (Y/N): Y
+
+1. Testing the employee name error message
+Employee Name (First Last): 
+
+2. Testing the blank ID error message
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 
+
+3. Testing the length requirement for employee ID 
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 9009
+
+4.Testing the length requirement for employee ID
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 900956
+
+5. Testing the hours worked error message
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: -1
+
+6. Testing the pay rate error message
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 23.5
+Pay Rate: $8.99
+
+7. Testing the tax error message
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 23.5
+Pay Rate: $15.04
+Federal Income Tax Withheld (Y/N): n
+
+8. Testing the half hour rounding
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 0.49
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): Y
+
+9. Testing the half hour rounding
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 0.5
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): Y
+
+10. Testing half hour rounding
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 0.99
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): Y
+
+11. Testing half hour rounding
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 1.49
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): Y
+
+12. Testing half hour rounding
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 1.51
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): Y
+
+13. Testing union fee deduction (no  deduction if exactly 150)
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 15
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): Y
+
+14. Testing union fee deduction (deduction for over 150)
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 15.5
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): Y
+
+14. Testing fed tax dedection (no subtraction if exactly 280 (union fee deduction still applies))
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 28
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): Y
+
+15. Testing fed tax deducion (subtraction of tax if over 280 and "Y", and union fee subtraction)
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 28.5
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): Y
+
+16. Testing fed tax deduction (no subtraction of tax if over 280 and "N", still union fee subtraction)
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 28.5
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): N
+
+17. Testing overtime (no overtime if exactly 40)
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 40
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): N
+
+18. Testing overtime (overtime payrate for any hours over 40)
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 40.5
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): N
+
+19. Testing that two decimal digits still display even if answer does not have a fractional part
+Employee Name (First Last): Dog Goofy
+Employee ID (5-digit): 90095
+Number of Hours Worked: 1.0
+Pay Rate: $10.00
+Federal Income Tax Withheld (Y/N): N

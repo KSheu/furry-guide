@@ -1,0 +1,299 @@
+Katherine Sheu
+HW2 Report
+
+1. Making sure I had the correct statements outputed per the specifications. 
+Because of the metamorphosis of the spec, my primary problem was keeping up with all the changes, especially as things were updated on both Piazza and the course website. Since certain conditions required different "goodbye" outputs, and certain exceptions were added (such as too small a range) or taken away (such as inputting -1), my primary problem was developing a vision of what the program should perform. As soon as the specs were more stable (thanks to the students and prof.) the actual coding was not so difficult. There were still some things to figure out, however.
+
+2. Seeding and outputing random numbers.
+I ended up using srand() and seeded the random number generator with the current time to ensure that rand() would produce a different set of random numbers each time.
+
+3. Finding a simple way to deal with slighly different game play for different levels.
+I used switch to deal with multiple levels of game play. 
+
+4. Figuring out the log functions.
+I imported the libraries <cmath> to use log functions and ceil() to round up any calculated values.
+
+5. Tracing the code by hand to sort out bugs such as repetitive code, incorrect counting.
+I had problems were portions of code were repeated inside and outside while loops, causing the program to wait twice for user input. I solved this by tracing the code and eliminating repetitive code. Especially also for the switch statement, I remove code that was similar to both cases to be executed outside the declared cases.
+
+6. Preventing the hint from printing if it is the last guess.
+I used break to prevent the hint or try again statement from printing if the guess was on the last try.
+
+7. Making sure the range of random numbers is correct.
+I used the mod operator to produce the correct range of random numbers. 
+
+
+Test Cases
+1. Testing iterating empty string prompt for name
+Your Name: 
+You must enter your name.
+
+You must enter your name.
+
+
+2. Testing not 1 or 2 for level.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 0
+Level of difficulty must be 1 (Easy) or 2 (Hard).
+3
+Level of difficulty must be 1 (Easy) or 2 (Hard).
+
+
+3. Testing not a positive integer for smallest number.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 0
+It must be a positive integer.
+-1
+It must be a positive integer.
+
+
+4. Testing not a positive integer for largest number.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 2
+The largest positive integer you want to guess: 0
+It must be a positive integer.
+-1
+It must be a positive integer.
+
+
+5. Testing that the largest number is bigger than the smallest error.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 2
+The largest positive integer you want to guess: 1
+The biggest integer must be greater than the smallest integer.
+2
+The biggest integer must be greater than the smallest integer.
+
+
+6.Testing that -1 on first guess prints out correct exit message.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 2
+The largest positive integer you want to guess: 256
+Awesome, Minnie! I’m thinking of an integer between 2 and 256. Make a guess.
+-1
+Sorry, Minnie! Goodbye!
+
+
+7. Testing that numbers outside range count as incorrect guesses.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 2
+The largest positive integer you want to guess: 256
+Awesome, Minnie! I’m thinking of an integer between 2 and 256. Make a guess.
+-2
+Sorry, Minnie! Try again or enter -1 to exit.
+
+
+8. Testing that -1 after the first guess causes an exit.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 2
+The largest positive integer you want to guess: 256
+Awesome, Minnie! I’m thinking of an integer between 2 and 256. Make a guess.
+10
+Sorry, Minnie! Try again or enter -1 to exit.
+-1
+Sorry, Minnie! Goodbye!
+
+
+9. Testing that game ends after stipulated number of incorrect guesses.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 1
+The largest positive integer you want to guess: 256
+Awesome, Minnie! I’m thinking of an integer between 1 and 256. Make a guess.
+8
+Sorry, Minnie! Try again or enter -1 to exit.
+170
+Sorry, Minnie! Try again or enter -1 to exit.
+84
+Sorry, Minnie! Try again or enter -1 to exit.
+201
+Sorry, Minnie! Game Over!
+Do you want to play another game (Y/N)? 
+
+
+10. Testing that only Y or N are accepted inputs.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 1
+The largest positive integer you want to guess: 256
+Awesome, Minnie! I’m thinking of an integer between 1 and 256. Make a guess.
+8
+Sorry, Minnie! Try again or enter -1 to exit.
+170
+Sorry, Minnie! Try again or enter -1 to exit.
+84
+Sorry, Minnie! Try again or enter -1 to exit.
+201
+Sorry, Minnie! Game Over!
+Do you want to play another game (Y/N)?
+no
+You must enter either Y or N.
+yes
+You must enter either Y or N.
+
+
+11. Testing that a correct guess prints play stats.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 2
+The largest positive integer you want to guess: 8
+Awesome, Minnie! I’m thinking of an integer between 2 and 8. Make a guess.
+5
+Congratulations, Minnie! You guessed the secret number 5!
+<Play Statistics>
+- Name: Minnie
+- Level: 2
+- Total number of times to guess 5: 1
+Do you want to play another game (Y/N)? 
+
+
+12. Testing that a correct guess on the last guess prints correct play stats.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 2
+The largest positive integer you want to guess: 8
+Awesome, Minnie! I’m thinking of an integer between 2 and 8. Make a guess.
+4
+Sorry, Minnie! Try again or enter -1 to exit.
+3
+Congratulations, Minnie! You guessed the secret number 3!
+<Play Statistics>
+- Name: Minnie
+- Level: 2
+- Total number of times to guess 3: 2
+Do you want to play another game (Y/N)?
+
+
+13. Testing that entering Y begins a new game with the same range and different random number.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 2
+The largest positive integer you want to guess: 8
+Awesome, Minnie! I’m thinking of an integer between 2 and 8. Make a guess.
+4
+Sorry, Minnie! Try again or enter -1 to exit.
+3
+Congratulations, Minnie! You guessed the secret number 3!
+<Play Statistics>
+- Name: Minnie
+- Level: 2
+- Total number of times to guess 3: 2
+Do you want to play another game (Y/N)?
+Y
+Awesome, Minnie! I’m thinking of an integer between 2 and 8. Make a guess.
+2
+Sorry, Minnie! Try again or enter -1 to exit.
+3
+Sorry, Minnie! Game over!
+Do you want to play another game (Y/N)?
+N
+Thank you for reading my mind, Minnie! Goodbye!
+
+14. Testing level 1 since the test cases here have all been level 2.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 1
+The smallest positive integer you want to guess: 1
+The largest positive integer you want to guess: 10
+Awesome, Minnie! I’m thinking of an integer between 1 and 10. Make a guess.
+5
+Sorry, Minnie! I’m thinking of a larger number. Try again or enter -1 to exit.
+8
+Sorry, Minnie! I’m thinking of a smaller number. Try again or enter -1 to exit.
+7
+Congratulations, Minnie! You guessed the secret number 7!
+<Play Statistics>
+- Name: Minnie
+- Level: 1
+- Total number of times to guess 7: 3
+Do you want to play another game (Y/N)?
+Y
+Awesome, Minnie! I’m thinking of an integer between 1 and 10. Make a guess.
+1
+Sorry, Minnie! I’m thinking of a larger number. Try again or enter -1 to exit.
+10
+Sorry, Minnie! I’m thinking of a smaller number. Try again or enter -1 to exit.
+7
+Sorry, Minnie! Game over!
+Do you want to play another game (Y/N)?
+Y
+Awesome, Minnie! I’m thinking of an integer between 1 and 10. Make a guess.
+-1
+Sorry, Minnie! Goodbye!
+
+
+15. Testing that the correct number of guesses are allowed.
+Level of Difficulty (1 – Easy; 2 – Hard): 1
+The smallest positive integer you want to guess: 1
+The largest positive integer you want to guess: 2
+Awesome, Minnie! I’m thinking of an integer between 1 and 2. Make a guess.
+1
+Congratulations, Minnie! You guessed the secret number 1!
+<Play Statistics>
+- Name: Minnie
+- Level: 1
+- Total number of times to guess 1: 1
+Do you want to play another game (Y/N)?
+Y
+Awesome, Minnie! I’m thinking of an integer between 1 and 2. Make a guess.
+1
+Sorry, Minnie! Game over!
+Do you want to play another game (Y/N)?
+
+
+16. Testing that "Sorry...Goodbye!" is printed if player has not won a game and inputs N.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 2
+The smallest positive integer you want to guess: 2
+The largest positive integer you want to guess: 8
+Awesome, Minnie! I’m thinking of an integer between 2 and 8. Make a guess.
+2
+Sorry, Minnie! Try again or enter -1 to exit.
+3
+Sorry, Minnie! Game over!
+Do you want to play another game (Y/N)?
+N
+Sorry, Minnie! Goodbye!
+
+
+17. Testig that game statistics print out twice or more with the correct counts.
+Your Name: Minnie
+Level of Difficulty (1 – Easy; 2 – Hard): 1
+The smallest positive integer you want to guess: 1
+The largest positive integer you want to guess: 10
+Awesome, Minnie! I’m thinking of an integer between 1 and 10. Make a guess.
+5
+Sorry, Minnie! I’m thinking of a larger number. Try again or enter -1 to exit.
+8
+Sorry, Minnie! I’m thinking of a smaller number. Try again or enter -1 to exit.
+7
+Congratulations, Minnie! You guessed the secret number 7!
+<Play Statistics>
+- Name: Minnie
+- Level: 1
+- Total number of times to guess 7: 3
+Do you want to play another game (Y/N)?
+Y
+Awesome, Minnie! I’m thinking of an integer between 1 and 10. Make a guess.
+1
+Sorry, Minnie! I’m thinking of a larger number. Try again or enter -1 to exit.
+7
+Sorry, Minnie! I’m thinking of a smaller number. Try again or enter -1 to exit.
+5
+Congratulations, Minnie! You guessed the secret number 5!
+<Play Statistics>
+- Name: Minnie
+- Level: 1
+- Total number of times to guess 7: 3
+Do you want to play another game (Y/N)?
+Y
+Awesome, Minnie! I’m thinking of an integer between 1 and 10. Make a guess.
+-1
+Sorry, Minnie! Goodbye!
+
+

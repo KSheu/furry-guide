@@ -1,0 +1,94 @@
+Katherine Sheu
+HW#4 
+Report
+
+Problems
+1. Merging two arrays in decreasing order: At first I tried to approach the problem using the recursive merge sort, but I ended up just doing a selection sort after placing both smaller arrays into result.
+
+2. Deleting duplicates while accounting for three in a row. At first I tried to use a regular for loop, moving an element to the end whenever it equaled the one prior to it, but this would work for instances such as three or more in a row, since only every other instance would be removed. However, this problem can be solved if the comparison is made between the current element and the one before it, and the one before it is the one moved to the end. 
+
+3. Checking for preconditions. At first, I attempted to utilize the assert macro, but the assert macro would not let me return -1, so I decided to just use if statements at the beginning of each function. 
+
+
+Test cases
+Test cases are sample cases put into the main method. 
+1. Testing function 1
+//testing function 1
+	SPI_Class some_spis[4] = { SPI_SILVER, SPI_COPPER, SPI_GOLD,
+		SPI_COPPER };
+	int some_votes[4] = { 5400, 400, 6000, 600 };
+	bool some_grammy[4] = { false, false, false, true };
+	SPI_Change some_changes[4];
+	int i = computeSPI(some_spis, some_changes, some_votes, some_grammy,
+		4);
+	cout << "Testing for function 1 " << i << endl;
+	for (int i = 0; i < 4; i++){
+		cout << some_spis[i] << endl;
+	}
+	for (int i = 0; i < 4; i++){
+		cout << some_changes[i] << endl;
+	}
+	// Now some_spis is SPI_GOLD, SPI_PAPER, SPI_GOLD,
+	// SPI_PLATINUM
+	// and some_changes is SPI_CHANGE_UP, SPI_CHANGE_DOWN,
+	// SPOI_CHANGE_NO, SPI_CHANGE_UP
+2. Testing function 2
+//test function 2
+	int song_list[4];
+	int k = getRankingList(some_spis, SPI_PLATIUM, song_list, 4);
+	cout << "Testing function 2 " << k<< endl;
+	for (int i = 0; i < 4; i++){
+		cout << song_list[i] << endl;
+	}
+3. Testing function 3
+	//test function 3
+	int song_list[4];
+	int k = getChangeList(some_changes, SPI_CHANGE_NO, song_list, 4);
+	cout << "Testing function 3 " << k << endl;
+	for (int i = 0; i < 4; i++){
+		cout << song_list[i] << endl;
+	}
+4. Testing function 4
+	//test function 4
+	int song_list[4];
+	int k = getGrammyList(grammy, song_list, 4);
+	cout << "Testing function 4" << k << endl;
+	for (int i = 0; i < 4; i++){
+		cout << song_list[i] << endl;
+	}
+5. Testing function 5
+//test function 5
+	string jazz[4] = { "Take Five", "So What ? ", "Angela", "Affirmation"};
+	string rap[3] = { "YG my hitter", "Drake trophies", "B.o.b headband" };
+	string z[30];
+	int m = merge(jazz, 4, rap, 3, z, 30);
+	cout << "Testing merge function " << m << endl;
+	for (int i = 0; i < m; i++){
+		cout << z[i] << endl;
+	}
+
+6. Testing function 6
+//test function 6
+	string favorite[8] = {"Style", "If", "Clean", "Clean", "Heaven", "Heaven", "If", "If"};
+	int n = deleteDuplicates(favorite, 8);
+	cout << "Testing for delete dup " << n<< endl;
+	for (int i = 0; i < 8; i++){
+		cout << favorite[i] << endl;
+	}
+7. Testing function 7
+//test function 7
+	string favorites[6] = {"Style", "If", "So What ?", "Clean", "Heaven", "Take Five"};
+	int r = moveToStart(favorites, 6, 3); // returns 3
+	cout << "Test for move to start " << r<< endl;
+	for (int i = 0; i < 6; i++){
+		cout << favorites[i] << endl;
+	}
+8. Testing function 8
+//test function 8
+	int r2 = moveToEnd(favorites, 6, 3); // returns 3
+	cout << "Test for move to end " << r2 << endl;
+	for (int i = 0; i < 6; i++){
+		cout << favorites[i] << endl;
+	}
+	
+9. Tested the bad input cases by changing the parameters and printing the return value.

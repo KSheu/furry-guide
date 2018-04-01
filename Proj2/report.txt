@@ -1,0 +1,155 @@
+Report Project2 CS32
+Katherine Sheu
+
+Description
+This implementation uses a circular doubly linked list, with a dummy node that is left unintialized. The list contains Nodes with data members for the data value itself, and prev and next Node pointers. The prev and next pointers are linked into the Sequence when the Node is added.
+_________________________________________________
+
+Pseudocode
+
+1. insert (pos, value)
+if outside the range
+	return false
+find the position where the insertion should occur
+dynamically allocate a new node 
+set the previous node's next pointer to the new node and the new node's previous pointer to previous node
+set the position node's previous pointer to the new node and the new node's next pointer to the position node
+increment the size
+return true
+
+2. insert (value)
+for each position up the size:
+	compare the value to the value at the position
+	if value is less or the list is empty
+	insert value at the position
+	return true
+otherwise, insert it at the end
+return true
+
+3. erase (pos)
+if pos is outside range
+	return false
+find the position that needs to be erased
+set the previous node's next pointer to position's next pointer
+set next nodes previous pointer to the position's previous pointer
+delete node as position
+decrement size
+return true
+
+4. remove (value)
+initialize count variable
+for all the positions of the list
+	if the position's value = value
+	erase the node at position
+	increment count variable
+return count
+
+5. get(pos, value)
+if pos outside range
+	return false
+find the position indicated
+assign the data in the position's node to value
+return true
+
+6. set(pos, value)
+if pos outside range 
+	return false;
+find the position indicated
+assign value to the data holder in the position's node
+return true
+
+7. find (value)
+initialize location variable
+while (tracking pointer != value and !=starting value)
+	increment location variable
+if (value is found)
+	return location
+otherwise return -1
+
+8. swap (other)
+swap the sizes
+swap the head pointers
+
+9. subsequence(seq1, seq2)
+for segment of length seq2.size() in seq1
+count the number of consequtive matches
+if the number of matches ==the size of seq2
+	return the first position of the match in seq1
+otherwise return -1
+
+10. interleave(seq1, seq2, result)
+
+erase anything that may be remaining in result
+initialize count variables to keep track of location in the two sequences
+while (not at the end of seq1 or seq2 yet)
+	get the value of seq1 at location
+	get the value of seq2 at location
+	increment location variables for both
+	insert the value of seq1 to the end of result
+	insert the value of seq2 to the end of result
+if seq1 is longer
+	for each remaining position of seq1 to the end
+		get the value of seq1 at the location
+		insert value to the end of result
+do similarly if seq2 is longer
+
+_______________________________________________________________
+TEST CASES
+	// default constructor
+	Sequence s;
+	// For an empty sequence:
+	assert(s.size() == 0);   	          	// test size
+	assert(s.empty());              	   	// test empty
+	assert(s.remove("paratha") == 0);  		// nothing to remove 
+
+	//For a non-empty sequence
+	assert(s.insert(0, "lavash"));			//test insert
+	assert(s.insert(0, "tortilla"));		//test insert in non-empty list
+	assert(s.size() == 2);				//test size changes
+	ItemType x = "injera";
+	assert(s.get(0, x));				//test get returns correctly
+	assert(!(s.get(2, x)));
+	assert(x == "tortilla");			//test that value is correctly passed to variable
+
+	assert(s.get(1, x) && x == "lavash");		//test that multiple nodes are in the correct position
+	assert(s.erase(1));					//test erase
+	assert(s.size() == 1);				//test size change after erase
+	assert(s.set(0, "hello"));			//test set
+	assert(s.get(0, x) && x == "hello");
+	Sequence s2;	
+	s2 = s;					//test assignment operator
+	assert(s2.size() == 1);
+	Sequence s3(s2);				//test copy constructor
+	assert(s3.size() == 1);
+	assert(s3.erase(0));
+	s.swap(s3);				//test swap function on an empty list
+	assert(s.size() == 0);
+
+	
+//testing subsequence
+s.insert("1");
+s.insert("2");
+s.insert("3");
+s.insert("4");
+s.insert("5");
+Sequence t;
+t.insert("2");
+t.insert("3");
+t.insert("4");
+assert(subsequence(s, t) == 2);			//test if the subsequence is found
+t.remove("3");
+assert(subsequence(s, t) == -1);		//test if subsequence is not found
+
+
+//testing interleave
+Sequence result;
+interleave(s, t, result);			//seq1 and seq2 are different lengths
+Sequence empty1;
+Sequence empty2;
+interleave(empty1, empty2, result);		//seqs are empty
+empty2.insert("hello");
+empty1.insert("goodbye");			
+interleave(empty1,empty2, result);		//test when sequences are the same length
+
+	
+

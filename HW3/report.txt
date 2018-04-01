@@ -1,0 +1,115 @@
+Katherine Sheu
+
+HW#3 Report
+
+1. isprint()
+In order to check that it was a valid ASCII character, I used the isprint() function.
+2. Making hollow shapes
+To make hollow shape, I used if statements within nested for loops to print out the borders.
+3. Making a triangle
+To make a triangle, I modified the inner for loop of the rectangle drawer so that the number of chars printed out matched the current row
+4. Taking not int menu inputs
+In order to display the error for wrong inputs, I used cin.clear() and cin.ignore(numeric_limits<streamsize>::max(), '\n').
+
+Test cases
+Test proper working function with no erroneous inputs----#1
+1
+41 //test wrong height
+1
+40 
+51 //test wrong width
+1
+40
+50
+2 //test correct character input
+@
+3 //test correct shape menu function
+1 
+40 //test shape height max
+1
+0 //test shape height min
+1
+1 //test shape height middle
+5
+50 //test shape width max
+2
+0 //test shape width min
+2 
+5 //test shape width middle
+3
+s //test solid rectangle
+40
+50
+3
+h //test hollow rectangle
+40
+50
+4
+s 
+50 //test input that fits width but is more than height
+4
+s
+40 //test solid triangle output
+4
+h
+40 //test hollow triangle output
+
+
+----------------------#2
+Testing the Incorrect option error for the menu
+one //enter repeated errors
+10
+5
+0
+n
+1 //enter correct option
+----------------------#3
+Testing error messages if canvas or pen not set up first
+3 //both errors displayed
+2
+@//enter a pen
+3 //only canvas error displayed and vice versa
+----------------------#4
+Testing acceptance of valid height inputs
+1
+41 //testing more than canvas height constant
+----------------------#5
+Testing acceptance of valid width input
+1 
+40
+51 //test more than canvas width constant
+-----------------------#6
+Testing a non-ASCII character
+2
+  //testing a non ASCII char
+-----------------------#7
+Testing a incorrect option for the shape menu
+1
+23
+34
+2
+%
+3
+one //test incorrect input
+no
+667
+12
+1 //correct input works
+------------------------#8
+Testing exit from shape menu to main menu and back again
+1
+23
+34
+2
+@
+3
+5 //exit to main menu
+3 //back to shape menu
+5 //to main menu
+4 //exit completely with goodbye message
+
+
+
+
+
+
